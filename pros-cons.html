@@ -9,8 +9,10 @@ body {
   text-align: center;
   padding: 40px 20px;
   color: #b30059;
+  margin: 0;
 }
 
+/* Big container */
 .big-box {
   background: white;
   width: 90%;
@@ -22,7 +24,7 @@ body {
   position: relative;
 }
 
-/* Close button on top right */
+/* Close button */
 .close-btn {
   position: absolute;
   top: -20px;
@@ -120,6 +122,7 @@ body {
 
 <div class="big-box">
 
+  <!-- Close button -->
   <div class="close-btn" onclick="goHome()">×</div>
 
   <!-- Pros Section -->
@@ -176,14 +179,14 @@ function updatePro() {
   document.getElementById("continueBtn").style.display = index===pros.length-1 ? "block":"none";
 }
 
-// Initialize
+// Initialize first pro
 updatePro();
 
 // Button functions
 function nextPro(){ if(index<pros.length-1){ index++; updatePro(); } }
 function prevPro(){ if(index>0){ index--; updatePro(); } }
 
-// Show Cons
+// Show Cons section
 function showCon() {
   document.getElementById("counter").style.display = "none";
   document.getElementById("prevBtn").style.display = "none";
@@ -194,7 +197,6 @@ function showCon() {
 
 // Close button
 function goHome(){ window.location.href="index.html"; }
-
 </script>
 
 </body>
