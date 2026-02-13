@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will you be my Valentine?</title>
+<style>
+body {background-color:pink; font-family:'Segoe UI',sans-serif; text-align:center; padding:50px; color:#b30059;}
+button {padding:20px 50px; font-size:1.5rem; margin:20px; border:none; border-radius:30px; cursor:pointer; background:#ff4d88; color:white; box-shadow:0 0 10px #ff4d88;}
+button:hover {transform: scale(1.1);}
+</style>
+</head>
+<body>
+
+<h1>Will you be my Valentine? 💘</h1>
+<button id="yesBtn">YES</button>
+<button id="noBtn">NO</button>
+
+<script>
+document.getElementById("yesBtn").addEventListener("click", () => {
+  window.location.href = "pros-cons.html";
+});
+
+document.getElementById("noBtn").addEventListener("click", () => {
+  alert("You must say YES! 💖");
+});
+</script>
+
+</body>
+</html>
