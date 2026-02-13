@@ -1,0 +1,144 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Something Special</title>
+<style>
+body {
+  background-color: pink;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  padding-top: 50px;
+  color: #b30059;
+}
+
+/* GIF at the top */
+#topGif {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 20px auto;
+  border-radius: 20px;
+}
+
+/* Title */
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+button {
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  margin: 15px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  background-color: #ff4d88;
+  color: white;
+  box-shadow: 0 0 10px #ff4d88;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+/* Popup */
+#noPopup {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+#noPopup .modal-content {
+  position: relative;
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  color: #b30059;
+  font-weight: bold;
+}
+
+#noPopup .modal-content img {
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #b30059;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #ff3366;
+}
+</style>
+</head>
+<body>
+
+<!-- Top GIF -->
+<img id="topGif" src="https://media1.giphy.com/media/9fLsWpWMumzAYW5wsr/giphy.webp" alt="Special GIF">
+
+<h1>I made something special for you 💖</h1>
+<p>Do you want to see it?</p>
+
+<button id="yesBtn">YES</button>
+<button id="noBtn">NO</button>
+
+<!-- NO Popup -->
+<div id="noPopup">
+  <div class="modal-content">
+    <span class="close" id="closeNo">&times;</span>
+    <div style="margin-bottom: 15px;">HOW DARE YOU CLICK NO!!! SHUT UP AND CLICK YES 😡</div>
+    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWp0dnF6eGVnMnJmaHRyeDl2MjZoamZleTRldmE4dHRjc3o2czI5aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/EJm22VPqUSnfIOwt2I/giphy.gif" alt="Angry GIF">
+  </div>
+</div>
+
+<script>
+// NO button opens popup
+document.getElementById("noBtn").addEventListener("click", () => {
+  document.getElementById("noPopup").style.display = "block";
+});
+
+// Close popup properly
+document.getElementById("closeNo").addEventListener("click", () => {
+  document.getElementById("noPopup").style.display = "none";
+});
+
+// YES button redirects to Gift page
+document.getElementById("yesBtn").addEventListener("click", () => {
+  window.location.href = "gift.html"; // Change to your gift page
+});
+
+// Clicking outside closes popup
+window.addEventListener("click", (e) => {
+  const popup = document.getElementById("noPopup");
+  if (e.target === popup) {
+    popup.style.display = "none";
+  }
+});
+</script>
+
+</body>
+</html>
