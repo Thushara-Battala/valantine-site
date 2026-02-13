@@ -1,27 +1,116 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Pros & Cons</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pros & Cons 💘</title>
 <style>
-body {background:pink; font-family:'Segoe UI',sans-serif; text-align:center; padding:40px; color:#b30059;}
-.big-box {background:white; width:90%; max-width:700px; margin:0 auto; padding:25px; border-radius:20px; box-shadow:0 0 15px rgba(0,0,0,0.15); position:relative;}
-.close-btn {position:absolute; top:10px; right:15px; font-size:2rem; color:#ff4d88; cursor:pointer; font-weight:bold;}
-.section-title {font-size:1.8rem; color:#ff4d88; margin-bottom:10px;}
-.content {position:relative; height:220px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; margin-top:20px; transition:transform 0.4s ease;}
-.content img {width:120px; border-radius:10px; margin-bottom:10px;}
-.nav-btn, .continue-btn {background:#ffb6d9; border:none; cursor:pointer; position:absolute; bottom:10px; padding:8px 12px; border-radius:12px; box-shadow:0 0 8px #ffb6d9;}
-.nav-btn img {width:35px; filter: brightness(0);}
-#prevBtn {left:10px;} #nextBtn {right:10px;}
-.continue-btn {left:50%; transform:translateX(-50%); font-size:1.1rem; padding:10px 20px;}
-.counter {position:absolute; top:45px; right:15px; font-size:1.1rem; color:#ff4d88;}
+body {
+  background: pink;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  padding: 40px;
+  color: #b30059;
+}
+
+.big-box {
+  background: white;
+  width: 90%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 2rem;
+  color: #ff4d88;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.section-box {
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 25px;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.section-title {
+  font-size: 1.8rem;
+  color: #ff4d88;
+  margin-bottom: 10px;
+}
+
+.content {
+  position: relative;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 20px;
+  transition: transform 0.4s ease;
+}
+
+.content img {
+  width: 120px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.nav-btn, .continue-btn {
+  background: #ffb6d9;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px #ffb6d9;
+}
+
+.nav-btn img {
+  width: 35px;
+  filter: brightness(0);
+}
+
+#prevBtn { left: 10px; }
+#nextBtn { right: 10px; }
+
+.continue-btn {
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+  padding: 10px 20px;
+}
+
+.counter {
+  position: absolute;
+  top: 45px;
+  right: 15px;
+  font-size: 1.1rem;
+  color: #ff4d88;
+}
 </style>
 </head>
 <body>
 
 <h1>Pros & Cons 💘</h1>
+
 <div class="big-box">
+
   <div class="close-btn" onclick="goHome()">×</div>
 
+  <!-- PROS SECTION -->
   <div class="section-box">
     <div class="section-title">Pros</div>
     <div id="counter" class="counter">1/9</div>
@@ -36,11 +125,22 @@ body {background:pink; font-family:'Segoe UI',sans-serif; text-align:center; pad
     <button id="nextBtn" class="nav-btn" onclick="nextPro()">
       <img src="assets/right-button.png">
     </button>
-    <button id="continueBtn" class="continue-btn" style="display:none;" onclick="goToSpecial()">Continue</button>
+    <button id="continueBtn" class="continue-btn" style="display:none;" onclick="showCon()">Continue</button>
   </div>
+
+  <!-- CONS SECTION -->
+  <div class="section-box" id="conSection" style="display:none;">
+    <div class="section-title">Cons</div>
+    <div id="conContent" class="content">
+      <div style="font-size:1.4rem; margin-bottom:10px;">Nothing 😅</div>
+      <img src="assets/cons.gif">
+    </div>
+  </div>
+
 </div>
 
 <script>
+// PROS LIST
 const pros = [
   `<img src="assets/gif1.webp"><div>You get unlimited love and affection from me 💗</div>`,
   `<img src="assets/gif2.webp"><div>I’ll spoil you with surprises 🎀</div>`,
@@ -52,25 +152,45 @@ const pros = [
   `<img src="assets/gif8.webp"><div>I’ll make you smile on worst days 😊</div>`,
   `<img src="assets/gif9.webp"><div>Exclusive access to my heart ❤️</div>`
 ];
+
 let index = 0;
 
+// Update PRO content with smooth animation
 function updatePro(direction) {
   const proContent = document.getElementById("proContent");
   proContent.style.transform = direction==="next"?"translateX(-100%)":"translateX(100%)";
+
   setTimeout(()=> {
     proContent.innerHTML = pros[index];
     document.getElementById("counter").innerHTML = `${index+1}/9`;
-    proContent.style.transform = direction==="next"?"translateX(100%)":"translateX(-100%)";
-    setTimeout(()=> { proContent.style.transform="translateX(0)"; },50);
-    document.getElementById("nextBtn").style.display = index===8?"none":"block";
-    document.getElementById("continueBtn").style.display = index===8?"block":"none";
-  },300);
+    proContent.style.transform = direction==="next"?"translateX(100%)":"translateX(-100%)`;
+
+    setTimeout(()=> { proContent.style.transform="translateX(0)"; }, 50);
+
+    document.getElementById("nextBtn").style.display = index===pros.length-1?"none":"block";
+    document.getElementById("continueBtn").style.display = index===pros.length-1?"block":"none";
+  }, 300);
 }
 
-function nextPro(){ if(index<pros.length-1){ index++; updatePro("next"); } }
-function prevPro(){ if(index>0){ index--; updatePro("prev"); } }
-function goToSpecial(){ window.location.href="something-special.html"; }
-function goHome(){ window.location.href="index.html"; }
+function nextPro() {
+  if(index < pros.length-1) { index++; updatePro("next"); }
+}
+function prevPro() {
+  if(index > 0) { index--; updatePro("prev"); }
+}
+
+// Show CONS section after finishing pros
+function showCon() {
+  document.getElementById("counter").style.display = "none";
+  document.getElementById("prevBtn").style.display = "none";
+  document.getElementById("nextBtn").style.display = "none";
+  document.getElementById("continueBtn").style.display = "none";
+  document.getElementById("conSection").style.display = "block";
+}
+
+// Navigation
+function goToSpecial() { window.location.href="something-special.html"; }
+function goHome() { window.location.href="index.html"; }
 </script>
 
 </body>
