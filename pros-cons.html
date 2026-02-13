@@ -32,7 +32,7 @@ body {
   color: #ff4d88;
   cursor: pointer;
   font-weight: bold;
-  z-index: 999;
+  z-index: 9999; /* make sure it's above everything */
   background: white;
   border-radius: 50%;
   width: 45px;
@@ -52,6 +52,7 @@ body {
   min-height: 300px;
   position: relative;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  z-index: 1; /* make sure it’s below the close button */
 }
 
 /* Headings inside boxes */
@@ -74,14 +75,13 @@ body {
 /* Centered content */
 .content {
   position: relative;
-  height: 220px; 
+  min-height: 220px; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center; 
   text-align: center;
   margin-top: 20px;
-  transition: transform 0.4s ease;
 }
 
 .content img {
@@ -133,7 +133,7 @@ body {
     <div id="counter" class="counter">1/9</div>
 
     <div id="proContent" class="content">
-      <!-- Content will be loaded dynamically -->
+      <!-- first PRO will be injected by JS -->
     </div>
 
     <button id="prevBtn" class="nav-btn" onclick="prevPro()"> 
@@ -161,47 +161,37 @@ body {
 <script>
 // Pros array
 const pros = [
-  `<img src="https://media3.giphy.com/media/APFfofFGyZZKu5Wrdi/giphy.webp"><div>You get unlimited love and affection from me 💗</div>`,
-  `<img src="https://media0.giphy.com/media/3BsZihbRqgJxYCq4am/giphy.webp"><div>I’ll spoil you with surprises and cuteness 🎀</div>`,
-  `<img src="https://media0.giphy.com/media/IiK327KA4TtmUACn10/giphy.webp"><div>I’ll cook your fav meal every time without any excuse 🍽️💕</div>`,
-  `<img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnFldTU1Zm82YXE3a3h3bG9sNWpqY3VndWdhaHd0cWllaDQydmVwZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0BdmhC1s3Db9bwuzEA/giphy.gif"><div>I made your life guilt‑free — no pressure, no stress, just love 🤍</div>`,
-  `<img src="https://media3.giphy.com/media/GcfQBl0RN5thUZbV20/giphy.webp"><div>I will do your skin care and make you glow ✨</div>`,
-  `<img src="https://media1.giphy.com/media/Z1eaeMxawEyOs68vCH/giphy.webp"><div>I’ll give you relaxing massages whenever you need comfort ✨</div>`,
-  `<img src="https://media3.giphy.com/media/8ntk943P9K7fWIXPPi/giphy.webp"><div>You’ll always have someone who supports you 💪💞</div>`,
-  `<img src="https://media0.giphy.com/media/0LlrRPfLzrrYZP6xWF/giphy.webp"><div>I’ll make you smile even on your worst days 😊</div>`,
-  `<img src="https://media0.giphy.com/media/byXAeSAl2v1EApVL48/giphy.webp"><div>You get exclusive access to my heart forever ❤️</div>`
+  {img:"https://media3.giphy.com/media/APFfofFGyZZKu5Wrdi/giphy.webp", text:"You get unlimited love and affection from me 💗"},
+  {img:"https://media0.giphy.com/media/3BsZihbRqgJxYCq4am/giphy.webp", text:"I’ll spoil you with surprises and cuteness 🎀"},
+  {img:"https://media0.giphy.com/media/IiK327KA4TtmUACn10/giphy.webp", text:"I’ll cook your fav meal every time without any excuse 🍽️💕"},
+  {img:"https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnFldTU1Zm82YXE3a3h3bG9sNWpqY3VndWdhaHd0cWllaDQydmVwZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0BdmhC1s3Db9bwuzEA/giphy.gif", text:"I made your life guilt‑free — no pressure, no stress, just love 🤍"},
+  {img:"https://media3.giphy.com/media/GcfQBl0RN5thUZbV20/giphy.webp", text:"I will do your skin care and make you glow ✨"},
+  {img:"https://media1.giphy.com/media/Z1eaeMxawEyOs68vCH/giphy.webp", text:"I’ll give you relaxing massages whenever you need comfort ✨"},
+  {img:"https://media3.giphy.com/media/8ntk943P9K7fWIXPPi/giphy.webp", text:"You’ll always have someone who supports you 💪💞"},
+  {img:"https://media0.giphy.com/media/0LlrRPfLzrrYZP6xWF/giphy.webp", text:"I’ll make you smile even on your worst days 😊"},
+  {img:"https://media0.giphy.com/media/byXAeSAl2v1EApVL48/giphy.webp", text:"You get exclusive access to my heart forever ❤️"}
 ];
 
 let index = 0;
 
-// Load first pro on page load
-document.getElementById('proContent').innerHTML = pros[index];
-
-// Update PRO content
+// Function to update PRO content
 function updatePro() {
   const proContent = document.getElementById("proContent");
-  proContent.innerHTML = pros[index];
-  document.getElementById("counter").innerHTML = `${index+1}/${pros.length}`;
-
+  proContent.innerHTML = `<img src="${pros[index].img}"><div>${pros[index].text}</div>`;
+  document.getElementById("counter").innerText = `${index+1}/${pros.length}`;
   document.getElementById("prevBtn").style.display = index === 0 ? "none" : "block";
-  document.getElementById("nextBtn").style.display = index === pros.length - 1 ? "none" : "block";
-  document.getElementById("continueBtn").style.display = index === pros.length - 1 ? "block" : "none";
+  document.getElementById("nextBtn").style.display = index === pros.length -1 ? "none" : "block";
+  document.getElementById("continueBtn").style.display = index === pros.length -1 ? "block" : "none";
 }
 
-function nextPro() {
-  if(index < pros.length - 1){
-    index++;
-    updatePro();
-  }
-}
+// Load first PRO on page load
+updatePro();
 
-function prevPro() {
-  if(index > 0){
-    index--;
-    updatePro();
-  }
-}
+// Button functions
+function nextPro() { if(index < pros.length-1){ index++; updatePro(); } }
+function prevPro() { if(index > 0){ index--; updatePro(); } }
 
+// Show Cons section
 function showCon() {
   document.getElementById("counter").style.display = "none";
   document.getElementById("prevBtn").style.display = "none";
@@ -210,9 +200,8 @@ function showCon() {
   document.getElementById("conSection").style.display = "block";
 }
 
-function goHome() {
-  window.location.href = "index.html";
-}
+// Close button
+function goHome() { window.location.href = "index.html"; }
 </script>
 
 </body>
