@@ -80,8 +80,8 @@ body {
   align-items: center;
   justify-content: center; 
   text-align: center;
-  transition: transform 0.4s ease;
   margin-top: 20px;
+  transition: transform 0.4s ease;
 }
 
 .content img {
@@ -133,15 +133,14 @@ body {
     <div id="counter" class="counter">1/9</div>
 
     <div id="proContent" class="content">
-      <img src="https://media3.giphy.com/media/APFfofFGyZZKu5Wrdi/giphy.webp">
-      <div>You get unlimited love and affection from me 💗</div>
+      <!-- Content will be loaded dynamically -->
     </div>
 
-    <button id="prevBtn" class="nav-btn" onclick="prevPro()">
+    <button id="prevBtn" class="nav-btn" onclick="prevPro()"> 
       <img src="https://muthuselvam200.github.io/bemyvalentine/assets/left-button-DhDTxyy8.png">
     </button>
 
-    <button id="nextBtn" class="nav-btn" onclick="nextPro()">
+    <button id="nextBtn" class="nav-btn" onclick="nextPro()"> 
       <img src="https://muthuselvam200.github.io/bemyvalentine/assets/right-button-BfRG1e6e.png">
     </button>
 
@@ -160,7 +159,7 @@ body {
 </div>
 
 <script>
-// Pros array with working online GIFs
+// Pros array
 const pros = [
   `<img src="https://media3.giphy.com/media/APFfofFGyZZKu5Wrdi/giphy.webp"><div>You get unlimited love and affection from me 💗</div>`,
   `<img src="https://media0.giphy.com/media/3BsZihbRqgJxYCq4am/giphy.webp"><div>I’ll spoil you with surprises and cuteness 🎀</div>`,
@@ -175,25 +174,34 @@ const pros = [
 
 let index = 0;
 
-// Update PRO content
-function updatePro(direction) {
-  const proContent = document.getElementById("proContent");
-  proContent.style.transform = direction === "next" ? "translateX(-100%)" : "translateX(100%)";
-  setTimeout(() => {
-    proContent.innerHTML = pros[index];
-    document.getElementById("counter").innerHTML = `${index + 1}/9`;
-    proContent.style.transform = direction === "next" ? "translateX(100%)" : "translateX(-100%)";
-    setTimeout(() => { proContent.style.transform = "translateX(0)"; }, 50);
+// Load first pro on page load
+document.getElementById('proContent').innerHTML = pros[index];
 
-    document.getElementById("nextBtn").style.display = index === pros.length - 1 ? "none" : "block";
-    document.getElementById("continueBtn").style.display = index === pros.length - 1 ? "block" : "none";
-  }, 300);
+// Update PRO content
+function updatePro() {
+  const proContent = document.getElementById("proContent");
+  proContent.innerHTML = pros[index];
+  document.getElementById("counter").innerHTML = `${index+1}/${pros.length}`;
+
+  document.getElementById("prevBtn").style.display = index === 0 ? "none" : "block";
+  document.getElementById("nextBtn").style.display = index === pros.length - 1 ? "none" : "block";
+  document.getElementById("continueBtn").style.display = index === pros.length - 1 ? "block" : "none";
 }
 
-function nextPro() { if(index < pros.length - 1){ index++; updatePro("next"); } }
-function prevPro() { if(index > 0){ index--; updatePro("prev"); } }
+function nextPro() {
+  if(index < pros.length - 1){
+    index++;
+    updatePro();
+  }
+}
 
-// Show Cons section
+function prevPro() {
+  if(index > 0){
+    index--;
+    updatePro();
+  }
+}
+
 function showCon() {
   document.getElementById("counter").style.display = "none";
   document.getElementById("prevBtn").style.display = "none";
@@ -202,7 +210,6 @@ function showCon() {
   document.getElementById("conSection").style.display = "block";
 }
 
-// Redirect to homepage
 function goHome() {
   window.location.href = "index.html";
 }
