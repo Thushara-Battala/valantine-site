@@ -1,29 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Will you be my Valentine?</title>
+<title>Will You Be My Valentine?</title>
 <style>
-body {background-color:pink; font-family:'Segoe UI',sans-serif; text-align:center; padding:50px; color:#b30059;}
-button {padding:20px 50px; font-size:1.5rem; margin:20px; border:none; border-radius:30px; cursor:pointer; background:#ff4d88; color:white; box-shadow:0 0 10px #ff4d88;}
-button:hover {transform: scale(1.1);}
+body {
+  background-color: pink;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  padding-top: 80px;
+  color: #b30059;
+}
+
+/* Shy girl GIF */
+#girl {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 20px auto;
+  border-radius: 20px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 40px;
+}
+
+/* Button row */
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+button {
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  width: 180px;
+}
+
+/* YES button */
+#yesBtn {
+  background: #ff4d88;
+  color: white;
+  box-shadow: 0 0 12px #ff4d88;
+}
+
+/* NO button (runs away) */
+#noBtn {
+  background: #ff4d88;
+  color: white;
+  position: relative;
+}
+
+/* NOT SURE button */
+#maybeBtn {
+  background: #ff4d88;
+  color: white;
+  box-shadow: 0 0 12px #ff4d88;
+}
+
+/* Popup styling */
+#popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  width: 300px;
+  text-align: center;
+  color: #b30059;
+}
+
+#popup button {
+  background: #ff4d88;
+  color: white;
+  margin-top: 20px;
+}
 </style>
 </head>
 <body>
 
-<h1>Will you be my Valentine? 💘</h1>
-<button id="yesBtn">YES</button>
-<button id="noBtn">NO</button>
+<!-- Shy girl GIF -->
+<img id="girl" src="https://media.tenor.com/Lf7XXFDUGHkAAAAi/cosytales-chibi.gif" />
+
+<h1>Nachulu, will you be my Valentine?</h1>
+
+<!-- Buttons side by side -->
+<div class="button-row">
+  <button id="yesBtn" onclick="goNext()">YES 🎉</button>
+  <button id="noBtn" onmouseover="moveButton()">NO 🤍</button>
+  <button id="maybeBtn" onclick="openPopup()">Notsure 🤔</button>
+</div>
+
+<!-- Popup -->
+<div id="popup">
+  <p>Maybe I should explain the perks of being my valentine... let me tell you 😉</p>
+  <button onclick="goProsCons()">OK</button>
+</div>
 
 <script>
-document.getElementById("yesBtn").addEventListener("click", () => {
-  window.location.href = "pros-cons.html";
-});
+function moveButton() {
+  const btn = document.getElementById("noBtn");
+  const x = Math.random() * (window.innerWidth - 200);
+  const y = Math.random() * (window.innerHeight - 200);
+  btn.style.position = "absolute";
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+}
 
-document.getElementById("noBtn").addEventListener("click", () => {
-  alert("You must say YES! 💖");
-});
+function goNext() {
+  window.location.href = "something-special.html";
+}
+
+function openPopup() {
+  document.getElementById("popup").style.display = "block";
+}
+
+function goProsCons() {
+  window.location.href = "pros-cons.html";
+}
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
 </script>
 
 </body>
