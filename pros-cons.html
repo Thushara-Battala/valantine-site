@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Pros & Cons</title>
+<title>Pros & Cons 💘</title>
 <style>
 body {
   background-color: pink;
@@ -26,13 +26,21 @@ body {
 /* Close button */
 .close-btn {
   position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 2rem;
+  top: -20px;
+  right: -20px;
+  font-size: 2.5rem;
   color: #ff4d88;
   cursor: pointer;
   font-weight: bold;
   z-index: 999;
+  background: white;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
 /* Section box */
@@ -66,11 +74,11 @@ body {
 /* Centered content */
 .content {
   position: relative;
-  height: 220px; /* ensures perfect centering */
+  height: 220px; 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* centers GIF + text vertically */
+  justify-content: center; 
   text-align: center;
   transition: transform 0.4s ease;
   margin-top: 20px;
@@ -121,9 +129,7 @@ body {
 
   <!-- PRO SECTION -->
   <div class="section-box">
-
     <div class="section-title">Pros</div>
-
     <div id="counter" class="counter">1/9</div>
 
     <div id="proContent" class="content">
@@ -140,89 +146,63 @@ body {
     </button>
 
     <button id="continueBtn" class="continue-btn" style="display:none;" onclick="showCon()">Continue</button>
-
   </div>
 
   <!-- CON SECTION -->
-  <div class="section-box">
-
+  <div class="section-box" id="conSection" style="display:none;">
     <div class="section-title">Cons</div>
-
     <div id="conContent" class="content">
       <div style="font-size:1.4rem; margin-bottom:10px;">nothing</div>
       <img src="https://media3.giphy.com/media/kEVRA3j2cSN3SZo2HS/giphy.webp">
     </div>
-
   </div>
 
 </div>
 
 <script>
-/* PROS LIST */
+// Pros array with working online GIFs
 const pros = [
-  <img src="https://media3.giphy.com/media/APFfofFGyZZKu5Wrdi/giphy.webp"><div>You get unlimited love and affection from me 💗</div>,
-  <img src="https://media0.giphy.com/media/3BsZihbRqgJxYCq4am/giphy.webp"><div>I’ll spoil you with surprises and cuteness 🎀</div>,
-  <img src="https://media0.giphy.com/media/IiK327KA4TtmUACn10/giphy.webp"><div>I’ll cook your fav meal every time without any excuse 🍽️💕</div>,
-  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnFldTU1Zm82YXE3a3h3bG9sNWpqY3VndWdhaHd0cWllaDQydmVwZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0BdmhC1s3Db9bwuzEA/giphy.gif"><div>I made your life guilt‑free — no pressure, no stress, just love 🤍</div>,
-  <img src="https://media3.giphy.com/media/GcfQBl0RN5thUZbV20/giphy.webp"><div>I will do your skin care and make you glow ✨</div>,
-  <img src="https://media1.giphy.com/media/Z1eaeMxawEyOs68vCH/giphy.webp"><div>I’ll give you relaxing massages whenever you need comfort ✨</div>,
-  <img src="https://media3.giphy.com/media/8ntk943P9K7fWIXPPi/giphy.webp"><div>You’ll always have someone who supports you 💪💞</div>,
-  <img src="https://media0.giphy.com/media/0LlrRPfLzrrYZP6xWF/giphy.webp"><div>I’ll make you smile even on your worst days 😊</div>,
-  <img src="https://media0.giphy.com/media/byXAeSAl2v1EApVL48/giphy.webp"><div>You get exclusive access to my heart forever ❤️</div>
+  `<img src="https://media3.giphy.com/media/APFfofFGyZZKu5Wrdi/giphy.webp"><div>You get unlimited love and affection from me 💗</div>`,
+  `<img src="https://media0.giphy.com/media/3BsZihbRqgJxYCq4am/giphy.webp"><div>I’ll spoil you with surprises and cuteness 🎀</div>`,
+  `<img src="https://media0.giphy.com/media/IiK327KA4TtmUACn10/giphy.webp"><div>I’ll cook your fav meal every time without any excuse 🍽️💕</div>`,
+  `<img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnFldTU1Zm82YXE3a3h3bG9sNWpqY3VndWdhaHd0cWllaDQydmVwZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0BdmhC1s3Db9bwuzEA/giphy.gif"><div>I made your life guilt‑free — no pressure, no stress, just love 🤍</div>`,
+  `<img src="https://media3.giphy.com/media/GcfQBl0RN5thUZbV20/giphy.webp"><div>I will do your skin care and make you glow ✨</div>`,
+  `<img src="https://media1.giphy.com/media/Z1eaeMxawEyOs68vCH/giphy.webp"><div>I’ll give you relaxing massages whenever you need comfort ✨</div>`,
+  `<img src="https://media3.giphy.com/media/8ntk943P9K7fWIXPPi/giphy.webp"><div>You’ll always have someone who supports you 💪💞</div>`,
+  `<img src="https://media0.giphy.com/media/0LlrRPfLzrrYZP6xWF/giphy.webp"><div>I’ll make you smile even on your worst days 😊</div>`,
+  `<img src="https://media0.giphy.com/media/byXAeSAl2v1EApVL48/giphy.webp"><div>You get exclusive access to my heart forever ❤️</div>`
 ];
 
 let index = 0;
 
-/* Update PRO content */
+// Update PRO content
 function updatePro(direction) {
   const proContent = document.getElementById("proContent");
-
   proContent.style.transform = direction === "next" ? "translateX(-100%)" : "translateX(100%)";
-
   setTimeout(() => {
     proContent.innerHTML = pros[index];
-    document.getElementById("counter").innerHTML = ${index + 1}/9;
+    document.getElementById("counter").innerHTML = `${index + 1}/9`;
+    proContent.style.transform = direction === "next" ? "translateX(100%)" : "translateX(-100%)";
+    setTimeout(() => { proContent.style.transform = "translateX(0)"; }, 50);
 
-    proContent.style.transform = direction === "next" ? "translateX(100%)" : "translateX(-100%);
-
-    setTimeout(() => {
-      proContent.style.transform = "translateX(0)";
-    }, 50);
-
-    if (index === 8) {
-      document.getElementById("nextBtn").style.display = "none";
-      document.getElementById("continueBtn").style.display = "block";
-    } else {
-      document.getElementById("nextBtn").style.display = "block";
-      document.getElementById("continueBtn").style.display = "none";
-    }
-
+    document.getElementById("nextBtn").style.display = index === pros.length - 1 ? "none" : "block";
+    document.getElementById("continueBtn").style.display = index === pros.length - 1 ? "block" : "none";
   }, 300);
 }
 
-function nextPro() {
-  if (index < pros.length - 1) {
-    index++;
-    updatePro("next");
-  }
-}
+function nextPro() { if(index < pros.length - 1){ index++; updatePro("next"); } }
+function prevPro() { if(index > 0){ index--; updatePro("prev"); } }
 
-function prevPro() {
-  if (index > 0) {
-    index--;
-    updatePro("prev");
-  }
-}
-
-/* Show CON */
+// Show Cons section
 function showCon() {
   document.getElementById("counter").style.display = "none";
   document.getElementById("prevBtn").style.display = "none";
   document.getElementById("nextBtn").style.display = "none";
   document.getElementById("continueBtn").style.display = "none";
+  document.getElementById("conSection").style.display = "block";
 }
 
-/* Redirect to index */
+// Redirect to homepage
 function goHome() {
   window.location.href = "index.html";
 }
