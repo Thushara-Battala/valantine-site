@@ -13,13 +13,22 @@ body {
   color: #b30059;
   margin: 0;
 }
+
+/* Top GIF */
 #topGif {
   width: 180px;
   height: 180px;
   margin: 0 auto 20px auto;
   border-radius: 20px;
 }
-h1 { font-size: 2.2rem; margin-bottom: 20px; }
+
+/* Title */
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+/* Buttons */
 button {
   padding: 15px 35px;
   font-size: 1.2rem;
@@ -32,7 +41,11 @@ button {
   box-shadow: 0 0 10px #ff4d88;
   transition: transform 0.2s ease;
 }
-button:hover { transform: scale(1.1); }
+button:hover {
+  transform: scale(1.1);
+}
+
+/* NO Popup */
 #noPopup {
   display: none;
   position: fixed;
@@ -42,6 +55,7 @@ button:hover { transform: scale(1.1); }
   background-color: rgba(0,0,0,0.5);
   overflow: auto;
 }
+
 #noPopup .modal-content {
   position: relative;
   background-color: white;
@@ -53,26 +67,32 @@ button:hover { transform: scale(1.1); }
   color: #b30059;
   font-weight: bold;
 }
+
 #noPopup .modal-content img {
   width: 100%;
   margin-top: 15px;
   border-radius: 10px;
 }
+
+/* Close button */
 .close {
   position: absolute;
-  top: 10px; right: 15px;
+  top: 10px;
+  right: 15px;
   font-size: 28px;
   font-weight: bold;
   color: #b30059;
   cursor: pointer;
 }
-.close:hover { color: #ff3366; }
+.close:hover {
+  color: #ff3366;
+}
 </style>
 </head>
 <body>
 
 <!-- Top GIF -->
-<img id="topGif" src="https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif" alt="Special GIF">
+<img id="topGif" src="https://media0.giphy.com/media/3BsZihbRqgJxYCq4am/giphy.webp" alt="Special GIF">
 
 <h1>I made something special for you 💖</h1>
 <p>Do you want to see it?</p>
@@ -85,12 +105,14 @@ button:hover { transform: scale(1.1); }
   <div class="modal-content">
     <span class="close" id="closeNo">&times;</span>
     <div style="margin-bottom: 15px;">HOW DARE YOU CLICK NO!!! SHUT UP AND CLICK YES 😡</div>
-    <img src="https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif" alt="Angry GIF">
+  <img id="topGif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2ttcmMyaTd1d3BsM3FvMWNvcXRlamZra3pneHJoZjY2dDJ3Z2RvYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/zSRH6FOEbXfjsqJYZD/giphy.gif" alt="Special GIF">
+
+
   </div>
 </div>
 
 <script>
-// NO button opens popup
+// Open NO popup
 document.getElementById("noBtn").addEventListener("click", () => {
   document.getElementById("noPopup").style.display = "block";
 });
@@ -100,10 +122,10 @@ document.getElementById("closeNo").addEventListener("click", () => {
   document.getElementById("noPopup").style.display = "none";
 });
 
-// YES button redirect
+// YES button action
 document.getElementById("yesBtn").addEventListener("click", () => {
-  alert("You clicked YES! Redirect to gift page");
-  // window.location.href = "gift.html";
+  alert("You clicked YES! Redirect to gift page"); 
+  // window.location.href = "gift.html"; // Uncomment for actual redirect
 });
 
 // Close popup by clicking outside
