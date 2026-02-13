@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pros & Cons 💘</title>
+<title>Pros & Cons</title>
 <style>
 body {
-  background: pink;
+  background-color: pink;
   font-family: 'Segoe UI', sans-serif;
   text-align: center;
-  padding: 40px;
+  padding: 40px 20px;
   color: #b30059;
 }
 
+/* Big container box */
 .big-box {
   background: white;
   width: 90%;
@@ -24,6 +23,7 @@ body {
   position: relative;
 }
 
+/* Close button */
 .close-btn {
   position: absolute;
   top: 10px;
@@ -32,33 +32,48 @@ body {
   color: #ff4d88;
   cursor: pointer;
   font-weight: bold;
+  z-index: 999;
 }
 
+/* Section box */
 .section-box {
   background: #fff;
   border-radius: 15px;
   padding: 20px;
   margin-bottom: 25px;
+  min-height: 300px;
   position: relative;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
+/* Headings inside boxes */
 .section-title {
   font-size: 1.8rem;
+  font-weight: bold;
   color: #ff4d88;
   margin-bottom: 10px;
 }
 
+/* Counter */
+.counter {
+  position: absolute;
+  top: 45px;
+  right: 15px;
+  font-size: 1.1rem;
+  color: #ff4d88;
+}
+
+/* Centered content */
 .content {
   position: relative;
-  height: 220px;
+  height: 220px; /* ensures perfect centering */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* centers GIF + text vertically */
   text-align: center;
-  margin-top: 20px;
   transition: transform 0.4s ease;
+  margin-top: 20px;
 }
 
 .content img {
@@ -67,6 +82,7 @@ body {
   margin-bottom: 10px;
 }
 
+/* Navigation buttons */
 .nav-btn, .continue-btn {
   background: #ffb6d9;
   border: none;
@@ -92,14 +108,6 @@ body {
   font-size: 1.1rem;
   padding: 10px 20px;
 }
-
-.counter {
-  position: absolute;
-  top: 45px;
-  right: 15px;
-  font-size: 1.1rem;
-  color: #ff4d88;
-}
 </style>
 </head>
 <body>
@@ -108,89 +116,116 @@ body {
 
 <div class="big-box">
 
+  <!-- Close button -->
   <div class="close-btn" onclick="goHome()">×</div>
 
-  <!-- PROS SECTION -->
+  <!-- PRO SECTION -->
   <div class="section-box">
+
     <div class="section-title">Pros</div>
+
     <div id="counter" class="counter">1/9</div>
+
     <div id="proContent" class="content">
-      <img src="assets/gif1.webp">
+      <img src="https://media3.giphy.com/media/APFfofFGyZZKu5Wrdi/giphy.webp">
       <div>You get unlimited love and affection from me 💗</div>
     </div>
 
     <button id="prevBtn" class="nav-btn" onclick="prevPro()">
-      <img src="assets/left-button.png">
+      <img src="https://muthuselvam200.github.io/bemyvalentine/assets/left-button-DhDTxyy8.png">
     </button>
+
     <button id="nextBtn" class="nav-btn" onclick="nextPro()">
-      <img src="assets/right-button.png">
+      <img src="https://muthuselvam200.github.io/bemyvalentine/assets/right-button-BfRG1e6e.png">
     </button>
+
     <button id="continueBtn" class="continue-btn" style="display:none;" onclick="showCon()">Continue</button>
+
   </div>
 
-  <!-- CONS SECTION -->
-  <div class="section-box" id="conSection" style="display:none;">
+  <!-- CON SECTION -->
+  <div class="section-box">
+
     <div class="section-title">Cons</div>
+
     <div id="conContent" class="content">
-      <div style="font-size:1.4rem; margin-bottom:10px;">Nothing 😅</div>
-      <img src="assets/cons.gif">
+      <div style="font-size:1.4rem; margin-bottom:10px;">nothing</div>
+      <img src="https://media3.giphy.com/media/kEVRA3j2cSN3SZo2HS/giphy.webp">
     </div>
+
   </div>
 
 </div>
 
 <script>
-// PROS LIST
+/* PROS LIST */
 const pros = [
-  `<img src="assets/gif1.webp"><div>You get unlimited love and affection from me 💗</div>`,
-  `<img src="assets/gif2.webp"><div>I’ll spoil you with surprises 🎀</div>`,
-  `<img src="assets/gif3.webp"><div>I’ll cook your favorite meal 🍽️💕</div>`,
-  `<img src="assets/gif4.webp"><div>Life guilt-free — no pressure, just love 🤍</div>`,
-  `<img src="assets/gif5.webp"><div>I will do your skincare and make you glow ✨</div>`,
-  `<img src="assets/gif6.webp"><div>Relaxing massages whenever you need comfort ✨</div>`,
-  `<img src="assets/gif7.webp"><div>You’ll always have support 💪💞</div>`,
-  `<img src="assets/gif8.webp"><div>I’ll make you smile on worst days 😊</div>`,
-  `<img src="assets/gif9.webp"><div>Exclusive access to my heart ❤️</div>`
+  <img src="https://media3.giphy.com/media/APFfofFGyZZKu5Wrdi/giphy.webp"><div>You get unlimited love and affection from me 💗</div>,
+  <img src="https://media0.giphy.com/media/3BsZihbRqgJxYCq4am/giphy.webp"><div>I’ll spoil you with surprises and cuteness 🎀</div>,
+  <img src="https://media0.giphy.com/media/IiK327KA4TtmUACn10/giphy.webp"><div>I’ll cook your fav meal every time without any excuse 🍽️💕</div>,
+  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnFldTU1Zm82YXE3a3h3bG9sNWpqY3VndWdhaHd0cWllaDQydmVwZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0BdmhC1s3Db9bwuzEA/giphy.gif"><div>I made your life guilt‑free — no pressure, no stress, just love 🤍</div>,
+  <img src="https://media3.giphy.com/media/GcfQBl0RN5thUZbV20/giphy.webp"><div>I will do your skin care and make you glow ✨</div>,
+  <img src="https://media1.giphy.com/media/Z1eaeMxawEyOs68vCH/giphy.webp"><div>I’ll give you relaxing massages whenever you need comfort ✨</div>,
+  <img src="https://media3.giphy.com/media/8ntk943P9K7fWIXPPi/giphy.webp"><div>You’ll always have someone who supports you 💪💞</div>,
+  <img src="https://media0.giphy.com/media/0LlrRPfLzrrYZP6xWF/giphy.webp"><div>I’ll make you smile even on your worst days 😊</div>,
+  <img src="https://media0.giphy.com/media/byXAeSAl2v1EApVL48/giphy.webp"><div>You get exclusive access to my heart forever ❤️</div>
 ];
 
 let index = 0;
 
-// Update PRO content with smooth animation
+/* Update PRO content */
 function updatePro(direction) {
   const proContent = document.getElementById("proContent");
-  proContent.style.transform = direction==="next"?"translateX(-100%)":"translateX(100%)";
 
-  setTimeout(()=> {
+  proContent.style.transform = direction === "next" ? "translateX(-100%)" : "translateX(100%)";
+
+  setTimeout(() => {
     proContent.innerHTML = pros[index];
-    document.getElementById("counter").innerHTML = `${index+1}/9`;
-    proContent.style.transform = direction==="next"?"translateX(100%)":"translateX(-100%)`;
+    document.getElementById("counter").innerHTML = ${index + 1}/9;
 
-    setTimeout(()=> { proContent.style.transform="translateX(0)"; }, 50);
+    proContent.style.transform = direction === "next" ? "translateX(100%)" : "translateX(-100%);
 
-    document.getElementById("nextBtn").style.display = index===pros.length-1?"none":"block";
-    document.getElementById("continueBtn").style.display = index===pros.length-1?"block":"none";
+    setTimeout(() => {
+      proContent.style.transform = "translateX(0)";
+    }, 50);
+
+    if (index === 8) {
+      document.getElementById("nextBtn").style.display = "none";
+      document.getElementById("continueBtn").style.display = "block";
+    } else {
+      document.getElementById("nextBtn").style.display = "block";
+      document.getElementById("continueBtn").style.display = "none";
+    }
+
   }, 300);
 }
 
 function nextPro() {
-  if(index < pros.length-1) { index++; updatePro("next"); }
-}
-function prevPro() {
-  if(index > 0) { index--; updatePro("prev"); }
+  if (index < pros.length - 1) {
+    index++;
+    updatePro("next");
+  }
 }
 
-// Show CONS section after finishing pros
+function prevPro() {
+  if (index > 0) {
+    index--;
+    updatePro("prev");
+  }
+}
+
+/* Show CON */
 function showCon() {
   document.getElementById("counter").style.display = "none";
   document.getElementById("prevBtn").style.display = "none";
   document.getElementById("nextBtn").style.display = "none";
   document.getElementById("continueBtn").style.display = "none";
-  document.getElementById("conSection").style.display = "block";
 }
 
-// Navigation
-function goToSpecial() { window.location.href="something-special.html"; }
-function goHome() { window.location.href="index.html"; }
+/* Redirect to index */
+function goHome() {
+  window.location.href = "index.html";
+}
 </script>
 
 </body>
