@@ -13,22 +13,16 @@ body {
   color: #b30059;
   margin: 0;
 }
-
-/* Top GIF */
 #topGif {
   width: 180px;
   height: 180px;
   margin: 0 auto 20px auto;
   border-radius: 20px;
 }
-
-/* Title */
 h1 {
   font-size: 2.2rem;
   margin-bottom: 20px;
 }
-
-/* Buttons */
 button {
   padding: 15px 35px;
   font-size: 1.2rem;
@@ -41,11 +35,7 @@ button {
   box-shadow: 0 0 10px #ff4d88;
   transition: transform 0.2s ease;
 }
-button:hover {
-  transform: scale(1.1);
-}
-
-/* NO Popup */
+button:hover { transform: scale(1.1); }
 #noPopup {
   display: none;
   position: fixed;
@@ -57,7 +47,6 @@ button:hover {
   background-color: rgba(0,0,0,0.5);
   overflow: auto;
 }
-
 #noPopup .modal-content {
   position: relative;
   background-color: white;
@@ -70,14 +59,11 @@ button:hover {
   color: #b30059;
   font-weight: bold;
 }
-
 #noPopup .modal-content img {
   width: 100%;
   margin-top: 15px;
   border-radius: 10px;
 }
-
-/* Close button */
 .close {
   position: absolute;
   top: 10px;
@@ -87,15 +73,13 @@ button:hover {
   color: #b30059;
   cursor: pointer;
 }
-.close:hover {
-  color: #ff3366;
-}
+.close:hover { color: #ff3366; }
 </style>
 </head>
 <body>
 
 <!-- Top GIF -->
-<img id="topGif" src="https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif" alt="Special GIF">
+<img id="topGif" src="https://media1.giphy.com/media/9fLsWpWMumzAYW5wsr/giphy.webp" alt="Special GIF">
 
 <h1>I made something special for you 💖</h1>
 <p>Do you want to see it?</p>
@@ -108,7 +92,7 @@ button:hover {
   <div class="modal-content">
     <span class="close" id="closeNo">&times;</span>
     <div style="margin-bottom: 15px;">HOW DARE YOU CLICK NO!!! SHUT UP AND CLICK YES 😡</div>
-    <img src="https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif" alt="Angry GIF">
+    <img src="//media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWp0dnF6eGVnMnJmaHRyeDl2MjZoamZleTRldmE4dHRjc3o2czI5aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/EJm22VPqUSnfIOwt2I/giphy.gif" alt="Angry GIF">
   </div>
 </div>
 
@@ -125,7 +109,8 @@ document.getElementById("closeNo").addEventListener("click", () => {
 
 // YES button redirect
 document.getElementById("yesBtn").addEventListener("click", () => {
-  window.location.href = "gift.html"; // change to your next page
+  alert("You clicked YES! Redirect to gift page"); 
+  // window.location.href = "gift.html"; 
 });
 
 // Close popup by clicking outside
