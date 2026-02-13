@@ -3,16 +3,379 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Gift</title>
+<title>Special Delivery</title>
+
 <style>
-body {background:pink; font-family:'Segoe UI',sans-serif; text-align:center; padding:50px; color:#b30059;}
-h1 {font-size:2.2rem;}
-img {width:300px; border-radius:20px; margin-top:20px;}
+body {
+  background-color: pink;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+  text-align: center;
+  padding-top: 40px;
+}
+
+/* Title */
+h1 {
+  margin-bottom: 20px;
+  color: #b30059;
+  font-size: 2rem;
+}
+
+/* Bus image */
+#bus {
+  width: 420px;
+  position: relative;
+  left: -600px;
+  animation: drive 3s forwards ease-in-out;
+  cursor: pointer;
+}
+
+/* Bus drive animation */
+@keyframes drive {
+  0% { left: -600px; }
+  100% { left: calc(50% - 210px); }
+}
+
+/* Gift boxes */
+.gift {
+  width: 70px;
+  height: 70px;
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE35WoqrplptnThxDu7fHvjsi2z_x1E0N9xA&s');
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  position: absolute;
+  opacity: 0;
+  transition: transform 1s ease, opacity 0.5s ease;
+  cursor: pointer;
+}
+
+/* Scatter positions */
+.scatter-left1  { transform: translate(-200px, -20px); opacity: 1; }
+.scatter-left2  { transform: translate(-170px, 100px); opacity: 1; }
+.scatter-right1 { transform: translate(200px, -20px); opacity: 1; }
+.scatter-right2 { transform: translate(170px, 100px); opacity: 1; }
+.scatter-bottom { transform: translate(0px, 180px); opacity: 1; }
+
+/* Letters inside gifts */
+.letter {
+  position: absolute;
+  width: 140px;
+  height: 100px;
+  background-color: white;
+  border: 2px solid #b30059;
+  border-radius: 10px;
+  top: -150px;
+  left: -35px;
+  display: none;
+  padding: 10px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+  text-align: center;
+  font-weight: bold;
+  color: #b30059;
+}
+
+/* Modal styles */
+.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  position: relative;
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  color: #b30059;
+  font-weight: bold;
+}
+
+.modal-content img {
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #b30059;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #ff3366;
+}
+
+/* Yes/No buttons for date popup */
+#datePopup button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: 2px solid #b30059;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: white;
+  color: #b30059;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+#datePopup button:hover {
+  transform: scale(1.1);
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  #bus { width: 300px; }
+  .letter { width: 120px; left: -25px; top: -120px; }
+  .modal-content { width: 90%; }
+}
+
+/* Floating hearts for g2 */
+.heart {
+  position: absolute;
+  font-size: 24px;
+  pointer-events: none;
+  transition: transform 2s ease-out, opacity 2s ease-out;
+}
+
+/* Confetti for g5 */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #ff3366;
+  opacity: 0.8;
+  pointer-events: none;
+  border-radius: 50%;
+  animation: fall 2s linear forwards;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(300px) rotate(360deg); opacity: 0; }
+}
 </style>
 </head>
+
 <body>
-<h1>🎁 Here’s your special gift! 🎁</h1>
-<img src="assets/gif3.webp" alt="Gift GIF">
-<p>Hope you liked it! 💖</p>
+
+<h1>Your gifts are arriving… 🎁💗</h1>
+
+<div style="position:relative; display:inline-block;">
+  <!-- Bus -->
+  <img id="bus" src="https://png.pngtree.com/png-clipart/20190921/original/pngtree-yellow-cartoon-school-bus-illustration-png-image_4690608.jpg">
+
+  <!-- Gifts -->
+  <div class="gift" id="g1" style="left:100px; top:-110px;">
+    <div class="letter">💌 Clicked! 💖</div>
+  </div>
+  <div class="gift" id="g2" style="left:200px; top:-110px;">
+    <div class="letter">🌸 You are amazing! 🌸</div>
+  </div>
+  <div class="gift" id="g3" style="left:250px; top:-110px;">
+    <div class="letter">🎉 Happy Valentine's Day! 🎉</div>
+  </div>
+  <div class="gift" id="g4" style="left:160px; top:-110px;">
+    <div class="letter">💗 Click me for a question! 💗</div>
+  </div>
+  <div class="gift" id="g5" style="left:180px; top:170px;">
+    <div class="letter">✨ Believe in yourself! ✨</div>
+  </div>
+</div>
+
+<!-- g1 modal -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <span class="close" id="close1">&times;</span>
+    <div>I love you Nanna 💖</div>
+    <img src="https://media0.giphy.com/media/byTkG3fBegmk2nEVbX/giphy.webp" alt="Love GIF">
+  </div>
+</div>
+
+<!-- g2 modal -->
+<div id="modalG2" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeG2">&times;</span>
+    <div style="margin-bottom:10px;">I will not let you go even in my dreams</div>
+    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHN0bDh4aWtsbDc4cXlnczA0amNwZDBwdDJrMWp6d2ZkcGk4ZjB3NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/o9eoRKn082KBiETtkl/giphy.gif" alt="Hearts GIF">
+  </div>
+</div>
+
+<!-- g3 modal -->
+<div id="modalG3" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeG3">&times;</span>
+    <div>Happy Valentine's Day 💖</div>
+    <img src="https://media4.giphy.com/media/n3KZaXLYLuyNSHEvbm/giphy.webp" alt="Valentine GIF">
+  </div>
+</div>
+
+<!-- g5 modal -->
+<div id="modalG5" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeG5">&times;</span>
+    <div id="loveMessage" style="margin-bottom:10px;font-weight:bold;color:#b30059;"></div>
+    <img src="https://media0.giphy.com/media/iEbTj6K4qSX1ZgPNBj/giphy.webp" alt="Confetti GIF">
+  </div>
+</div>
+
+<!-- Bottom-left gift date popup -->
+<div id="datePopup" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeDate">&times;</span>
+    <div style="margin-bottom: 20px;">Will you be my date for this Valentine? 💖</div>
+    <button id="yesBtn">YES</button>
+    <button id="noBtn">NO</button>
+  </div>
+</div>
+
+<!-- Modal after YES clicked -->
+<div id="yesModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeYes">&times;</span>
+    <img src="https://media0.giphy.com/media/cXDJ4iKAM3sCShJThn/giphy.webp" alt="Yes GIF">
+  </div>
+</div>
+
+<script>
+// Scatter gifts when bus is clicked
+let scattered = false;
+document.getElementById("bus").addEventListener("click", () => {
+  if (!scattered) {
+    document.querySelectorAll(".gift").forEach(g => g.style.opacity = "1");
+    document.getElementById("g1").classList.add("scatter-left1");
+    document.getElementById("g2").classList.add("scatter-left2");
+    document.getElementById("g3").classList.add("scatter-right1");
+    document.getElementById("g4").classList.add("scatter-right2");
+    document.getElementById("g5").classList.add("scatter-bottom");
+    scattered = true;
+  }
+});
+
+// g1 opens modal1
+document.getElementById("g1").addEventListener("click", (e) => {
+  e.stopPropagation();
+  document.getElementById("modal1").style.display = "block";
+});
+
+// g2 floating hearts + modal with message
+document.getElementById("g2").addEventListener("click", (e) => {
+  e.stopPropagation();
+  const rect = e.target.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+
+  // floating hearts
+  for (let i = 0; i < 15; i++) {
+    setTimeout(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = "💖";
+      heart.style.left = centerX + (Math.random()-0.5)*100 + "px";
+      heart.style.top = centerY + (Math.random()-0.5)*50 + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => {
+        heart.style.transform = `translateY(-200px) scale(1.5) rotate(${Math.random()*360}deg)`;
+        heart.style.opacity = 0;
+      }, 50);
+      setTimeout(() => heart.remove(), 2000);
+    }, i*100);
+  }
+
+  // open modal
+  document.getElementById("modalG2").style.display = "block";
+});
+
+// g3 opens modal with Happy Valentine message
+document.getElementById("g3").addEventListener("click",(e)=>{
+  e.stopPropagation();
+  document.getElementById("modalG3").style.display="block";
+});
+
+// g5 confetti + random love message + modal
+const loveMessages = [
+  "💖 You are amazing! 💖",
+  "🌹 My heart is yours 🌹",
+  "💌 You light up my life 💌",
+  "✨ Always thinking of you ✨",
+  "💗 Forever and always 💗"
+];
+
+document.getElementById("g5").addEventListener("click", (e) => {
+  e.stopPropagation();
+  const modal = document.getElementById("modalG5");
+  document.getElementById("loveMessage").textContent = loveMessages[Math.floor(Math.random()*loveMessages.length)];
+  modal.style.display = "block";
+
+  // Confetti
+  for (let i=0;i<50;i++){
+    const conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.style.left = Math.random()*window.innerWidth + "px";
+    conf.style.top = Math.random()*window.innerHeight/2 + "px";
+    conf.style.backgroundColor = `hsl(${Math.random()*360},80%,60%)`;
+    document.body.appendChild(conf);
+    setTimeout(()=>conf.remove(),2000);
+  }
+});
+
+// g4 opens datePopup
+document.getElementById("g4").addEventListener("click", (e) => {
+  e.stopPropagation();
+  document.getElementById("datePopup").style.display = "block";
+});
+
+// Close buttons
+document.querySelectorAll(".close").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    btn.parentElement.parentElement.style.display="none";
+  });
+});
+
+// Close modals when clicking outside
+window.addEventListener("click",(e)=>{
+  document.querySelectorAll(".modal").forEach(m=>{
+    if(e.target===m)m.style.display="none";
+  });
+});
+
+// NO button interaction
+const yesBtn = document.getElementById("yesBtn");
+document.getElementById("noBtn").addEventListener("click", () => {
+  const currentScale = parseFloat(window.getComputedStyle(yesBtn).transform.match(/matrix.*\((.+)\)/)?.[1].split(',')[0]) || 1;
+  yesBtn.style.transform = `scale(${currentScale + 0.1})`;
+});
+
+// YES button opens YES modal
+yesBtn.addEventListener("click", () => {
+  document.getElementById("datePopup").style.display = "none";
+  document.getElementById("yesModal").style.display = "block";
+});
+
+// g3 letter toggle (optional)
+document.querySelector("#g3 .letter").addEventListener("click",(e)=>{
+  e.stopPropagation();
+  const letter = document.querySelector("#g3 .letter");
+  letter.style.display = letter.style.display==="block"?"none":"block";
+});
+</script>
+
 </body>
 </html>
